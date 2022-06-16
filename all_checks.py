@@ -21,17 +21,18 @@ def disk_root_full():
 
 
 def main():
-    if Reboot():
-        print('Computer is reboot pending!!!')
-        sys.exit(1)
-    print('Reboot is Not Pending ...')
+    checks=[
+        (Reboot,'Pending Reboot'),
+        (disk_root_full,'Root Partition full')
+    ]
     
-    if disk_root_full():
-        print('Root partition is Full')
-        sys.exit(1)
-    
-    print('Every Thing is Ok!')
-    sys.exit(0)
+    for check, msg in checks:
+        if  check():
+            print(msg)
+            sys.exit(1)
+                
+        print('Every Thing is Ok!')
+        sys.exit(0)
     
 
 main()
