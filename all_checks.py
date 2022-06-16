@@ -8,7 +8,6 @@ def check_network():
     try:
         socket.gethostbyname('www.google.com')
         return False
-    
     except:
         return True
 
