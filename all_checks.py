@@ -1,7 +1,16 @@
 import os
 import shutil
 import sys
+import socket
 
+
+def check_network():
+    try:
+        socket.gethostbyname('www.google.com')
+        return False
+    
+    except:
+        return True
 
 def Reboot():
     return os.path.exists('/run/reboot-required')
@@ -23,7 +32,8 @@ def disk_root_full():
 def main():
     checks=[
         (Reboot,'Pending Reboot'),
-        (disk_root_full,'Root Partition full')
+        (disk_root_full,'Root Partition full'),
+        (check_network,'No working Network')
     ]
     EveryThing_ok=True
     for check, msg in checks:
